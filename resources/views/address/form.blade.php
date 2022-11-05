@@ -1,0 +1,57 @@
+<ul class="nav nav-tabs" id="custom-tabs-two-tab" role="tablist">
+    <li class="nav-item active">
+        <a class="nav-link active" id="custom-tabs-one-ru-tab" data-toggle="pill" href="#custom-tabs-one-ru" role="tab"
+           aria-controls="custom-tabs-one-ru" aria-selected="true">Русский</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="custom-tabs-one-en-tab" data-toggle="pill" href="#custom-tabs-one-en" role="tab"
+           aria-controls="custom-tabs-one-en" aria-selected="false">Английский</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="custom-tabs-one-kz-tab" data-toggle="pill" href="#custom-tabs-one-kz" role="tab"
+           aria-controls="custom-tabs-one-kz" aria-selected="false">Казахский</a>
+    </li>
+</ul>
+
+<div class="tab-content col-md-12" id="custom-tabs-one-tabContent">
+    <div class="tab-pane fade active in" id="custom-tabs-one-ru" role="tabpanel"
+         aria-labelledby="custom-tabs-one-ru-tab">
+        <div class="form-group {{ $errors->has('title') ? 'has-error' : ''}}">
+            <label for="title_ru" class="control-label">{{ 'Наименование RU' }}</label>
+            <input class="form-control" name="title[ru]" type="text" id="title_ru"
+                   value="{{ isset($address) ? $address->getTitle->ru : old('title.ru')}}">
+            {!! $errors->first('title[ru]', '<p class="help-block">:message</p>') !!}
+        </div>
+    </div>
+
+    <div class="tab-pane fade" id="custom-tabs-one-en" role="tabpanel" aria-labelledby="custom-tabs-one-en-tab">
+        <div class="form-group {{ $errors->has('title') ? 'has-error' : ''}}">
+            <label for="title_en" class="control-label">{{ 'Наименование EN' }}</label>
+            <input class="form-control" name="title[en]" type="text" id="title_en"
+                   value="{{ isset($address) ? $address->getTitle->en : old('title.en')}}">
+            {!! $errors->first('title[en]', '<p class="help-block">:message</p>') !!}
+        </div>
+    </div>
+
+    <div class="tab-pane fade" id="custom-tabs-one-kz" role="tabpanel" aria-labelledby="custom-tabs-one-kz-tab">
+        <div class="form-group {{ $errors->has('title') ? 'has-error' : ''}}">
+            <label for="title_kz" class="control-label">{{ 'Наименование KZ' }}</label>
+            <input class="form-control" name="title[kz]" type="text" id="title_kz"
+                   value="{{ isset($address) ? $address->getTitle->kz : old('title.kz')}}">
+            {!! $errors->first('title[kz]', '<p class="help-block">:message</p>') !!}
+        </div>
+    </div>
+</div>
+<div class="form-group col-md-12 {{ $errors->has('city_id') ? 'has-error' : ''}}">
+    <label for="city" class="control-label">{{ 'Выберите город:' }}</label>
+    <select name="city" id="city" class="form-control">
+        @foreach($cities as $city)
+            <option value="{{$city->id}}" @if (isset($address) ? $address->city_id == $city->id : null) selected @endif>{{ $city->getTitle->ru }}</option>
+        @endforeach
+    </select>
+</div>
+
+
+<div class="form-group col-md-12">
+    <input class="btn btn-primary" type="submit" value="Принять">
+</div>

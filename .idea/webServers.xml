@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="b59376cc-5c2a-44b1-89a0-e6df90dd0406" name="vivid">
+        <fileTransfer rootFolder="/var/www/nomad/data/www/vivid/backend/" accessType="SFTP" host="185.146.3.184" port="22" sshConfigId="13be70a3-0a0e-4633-821d-084ca8e85512" sshConfig="root@185.146.3.184:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="03d3da53-d840-48d3-9693-4351c89f8d6c" name="hawaii-server">
+        <fileTransfer rootFolder="/var/www/www-root/data/www/back-hawaii.test-vip.kz" accessType="SFTP" host="185.22.65.112" port="22" sshConfigId="45c87b60-9f3f-489b-91de-dc0b02727c03" sshConfig="root@185.22.65.112:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="97e7088a-6b7c-47a9-b81c-96650dbba57a" name="studionomad">
+        <fileTransfer rootFolder="/var/www/studionomad/data/www/studionomad.kz" accessType="SFTP" host="185.22.65.112" port="22" sshConfigId="45c87b60-9f3f-489b-91de-dc0b02727c03" sshConfig="root@185.22.65.112:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="515992eb-8452-46c9-8292-0753fcf3b29e" name="vivid-195">
+        <fileTransfer rootFolder="/var/www/www-root/data/www/vivid/back" accessType="SFTP" host="195.49.212.123" port="22" sshConfigId="6fbc3068-d341-4802-ae26-9245211923f4" sshConfig="root@195.49.212.123:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
