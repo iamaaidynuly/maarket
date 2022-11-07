@@ -13,4 +13,13 @@ class TranslateService
             'en'    =>  $data['en'],
         ]);
     }
+
+    public function translateUpdate($id, $data)
+    {
+        return Translate::find($id)->update([
+            'ru'    =>  $data['ru'],
+            'kz'    =>  $data['kz'],
+            'en'    =>  $data['en'],
+        ]);
+    }
 }

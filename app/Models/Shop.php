@@ -23,5 +23,6 @@ class Shop extends Model
         'delivery',
         'created_at',
         'updated_at',
+        'verified_at',
     ];
 }

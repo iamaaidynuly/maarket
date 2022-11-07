@@ -19,13 +19,14 @@
         <div class="form-group col-md-12 {{ $errors->has('title.ru') ? 'has-error' : '' }}">
             <label for="title_ru" class="control-label">{{ 'Название Ru' }}</label>
             <input class="form-control" name="title[ru]" type="text" id="title_ru"
-                   value="{{ isset($shop->title) ? $shop->getTitle->ru : old('title.ru') }}">
+                   value="{{ isset($shop->name) ? $shop->getName->ru : old('name.ru') }}">
             {!! $errors->first('title.ru', '<p class="help-block">:message</p>') !!}
         </div>
 
         <div class="form-group col-md-12 {{ $errors->has('description.ru') ? 'has-error' : '' }}">
             <label for="description_ru" class="control-label">{{ 'Описание Ru' }}</label>
-            <textarea class="form-control" name="description[ru]" id="description_ru" rows="10">{{ isset($shop->description) ? $shop->getDesc->ru : old('description.ru') }}</textarea>
+            <textarea class="form-control" name="description[ru]" id="description_ru"
+                      rows="10">{{ isset($shop->description) ? $shop->getDescription->ru : old('description.ru') }}</textarea>
             {!! $errors->first('description.ru', '<p class="help-block">:message</p>') !!}
         </div>
         <div class="form-group col-md-12 {{ $errors->has('address.ru') ? 'has-error' : '' }}">
@@ -38,14 +39,14 @@
         <div class="form-group col-md-12 {{ $errors->has('min_price.ru') ? 'has-error' : '' }}">
             <label for="min_price_ru" class="control-label">{{ 'Мин.Сумма Ru' }}</label>
             <input class="form-control" name="min_price[ru]" type="text" id="min_price_ru"
-                   value="{{ isset($shop->min_price) ? $shop->getAddress->ru : old('min_price.ru') }}">
+                   value="{{ isset($shop->min_price) ? $shop->getMinPrice->ru : old('min_price.ru') }}">
             {!! $errors->first('min_price.ru', '<p class="help-block">:message</p>') !!}
         </div>
 
         <div class="form-group col-md-12 {{ $errors->has('delivery.ru') ? 'has-error' : '' }}">
             <label for="delivery_ru" class="control-label">{{ 'Доставка Ru' }}</label>
             <input class="form-control" name="delivery[ru]" type="text" id="delivery_ru"
-                   value="{{ isset($shop->delivery) ? $shop->getAddress->ru : old('delivery.ru') }}">
+                   value="{{ isset($shop->delivery) ? $shop->getDelivery->ru : old('delivery.ru') }}">
             {!! $errors->first('delivery.ru', '<p class="help-block">:message</p>') !!}
         </div>
     </div>
@@ -54,13 +55,14 @@
         <div class="form-group col-md-12 {{ $errors->has('title.en') ? 'has-error' : '' }}">
             <label for="title_en" class="control-label">{{ 'Название En' }}</label>
             <input class="form-control" name="title[en]" type="text" id="title_en"
-                   value="{{ isset($shop->title) ? $shop->getTitle->en : old('title.en') }}">
+                   value="{{ isset($shop->name) ? $shop->getName->en : old('name.en') }}">
             {!! $errors->first('title.en', '<p class="help-block">:message</p>') !!}
         </div>
 
         <div class="form-group col-md-12 {{ $errors->has('description.en') ? 'has-error' : '' }}">
             <label for="description_en" class="control-label">{{ 'Описание En' }}</label>
-            <textarea class="form-control" name="description[en]" id="description_en" rows="10">{{ isset($shop->description) ? $shop->getDesc->en : old('description.en') }}</textarea>
+            <textarea class="form-control" name="description[en]" id="description_en"
+                      rows="10">{{ isset($shop->description) ? $shop->getDescription->en : old('description.en') }}</textarea>
             {!! $errors->first('description.en', '<p class="help-block">:message</p>') !!}
         </div>
 
@@ -74,7 +76,7 @@
         <div class="form-group col-md-12 {{ $errors->has('min_price.en') ? 'has-error' : '' }}">
             <label for="min_price_en" class="control-label">{{ 'Мин.Сумма EN' }}</label>
             <input class="form-control" name="min_price[en]" type="text" id="min_price_en"
-                   value="{{ isset($shop->min_price) ? $shop->getAddress->en : old('min_price.en') }}">
+                   value="{{ isset($shop->min_price) ? $shop->getMinPrice->en : old('min_price.en') }}">
             {!! $errors->first('min_price.en', '<p class="help-block">:message</p>') !!}
         </div>
         <div class="form-group col-md-12 {{ $errors->has('delivery.en') ? 'has-error' : '' }}">
@@ -89,14 +91,14 @@
         <div class="form-group col-md-12 {{ $errors->has('title.kz') ? 'has-error' : '' }}">
             <label for="title_kz" class="control-label">{{ 'Название Kz' }}</label>
             <input class="form-control" name="title[kz]" type="text" id="title_kz"
-                   value="{{ isset($shop->title) ? $shop->getTitle->kz : old('title.kz') }}">
+                   value="{{ isset($shop->name) ? $shop->getName->kz : old('name.kz') }}">
             {!! $errors->first('title.kz', '<p class="help-block">:message</p>') !!}
         </div>
 
         <div class="form-group col-md-12 {{ $errors->has('description.kz') ? 'has-error' : '' }}">
             <label for="description_kz" class="control-label">{{ 'Описание Kz' }}</label>
             <textarea class="form-control" name="description[kz]" id="description_kz" rows="10">
-                {{ isset($shop->description) ? $shop->getDesc->kz : old('description.kz') }}
+                {{ isset($shop->description) ? $shop->getDescription->kz : old('description.kz') }}
             </textarea>
             {!! $errors->first('description.kz', '<p class="help-block">:message</p>') !!}
         </div>
@@ -109,13 +111,13 @@
         <div class="form-group col-md-12 {{ $errors->has('min_price.kz') ? 'has-error' : '' }}">
             <label for="min_price_kz" class="control-label">{{ 'Мин.Сумма KZ' }}</label>
             <input class="form-control" name="min_price[kz]" type="text" id="min_price_kz"
-                   value="{{ isset($shop->min_price) ? $shop->getAddress->kz : old('min_price.kz') }}">
+                   value="{{ isset($shop->min_price) ? $shop->getMinPrice->kz : old('min_price.kz') }}">
             {!! $errors->first('min_price.kz', '<p class="help-block">:message</p>') !!}
         </div>
         <div class="form-group col-md-12 {{ $errors->has('delivery.kz') ? 'has-error' : '' }}">
             <label for="delivery_kz" class="control-label">{{ 'Доставка KZ' }}</label>
             <input class="form-control" name="delivery[kz]" type="text" id="delivery_kz"
-                   value="{{ isset($shop->delivery) ? $shop->getAddress->kz : old('delivery.kz') }}">
+                   value="{{ isset($shop->delivery) ? $shop->getDelivery->kz : old('delivery.kz') }}">
             {!! $errors->first('delivery.kz', '<p class="help-block">:message</p>') !!}
         </div>
     </div>
@@ -130,27 +132,40 @@
 
 <div class="form-group col-md-6 {{ $errors->has('password') ? 'has-error' : '' }}">
     <label for="password" class="control-label">{{ 'Пароль:' }}</label>
-    <input class="form-control" name="password" type="password" id="password"
-           value="{{ isset($shop->password) ? $shop->password : old('password') }}">
+    <input class="form-control" name="password" type="password" id="password">
     {!! $errors->first('sale', '<p class="help-block">:message</p>') !!}
 </div>
 
-<div class="form-group col-md-6" {{ $errors->has('city_id') ? 'has-error' : '' }}>
-    <label for="city_id" class="control-label">{{ 'Город:' }}</label>
-    <select class="form-control" id="city_id" name="city_id">
-        @foreach($cities as $city)
-            <option value="{{$city->id}}" @if(isset($shop)) @if($city->id == $shop->city_id) selected @endif @endif>{{ $city->getTitle->ru }}</option>
-        @endforeach
-    </select>
-    {!! $errors->first('city_id', '<p class="help-block">:message</p>') !!}
-</div>
+<div class="row">
+    <div class="form-group col-md-4" {{ $errors->has('city_id') ? 'has-error' : '' }}>
+        <label for="city_id" class="control-label">{{ 'Город:' }}</label>
+        <select class="form-control" id="city_id" name="city_id">
+            @foreach($cities as $city)
+                <option value="{{$city->id}}"
+                        @if(isset($shop)) @if($city->id == $shop->city_id) selected @endif @endif>{{ $city->getTitle->ru }}</option>
+            @endforeach
+        </select>
+        {!! $errors->first('city_id', '<p class="help-block">:message</p>') !!}
+    </div>
 
-<div class="form-group col-md-6" {{ $errors->has('icon') ? 'has-error' : '' }}>
-    <label for="icon" class="control-label">{{ 'Иконка:' }}</label>
-    <input type="file" name="icon" class="form-control" id="icon">
-    {!! $errors->first('icon', '<p class="help-block">:message</p>') !!}
-</div>
+    <div class="form-group col-md-4" {{ $errors->has('icon') ? 'has-error' : '' }}>
+        <label for="icon" class="control-label">{{ 'Иконка:' }}</label>
+        <input type="file" name="icon" class="form-control" id="icon">
+        {!! $errors->first('icon', '<p class="help-block">:message</p>') !!}
+    </div>
 
+    <div class="form-group col-md-4">
+        <label for="verified" class="control-label">{{'Подтверждена:'}}</label><br>
+        <input type="checkbox" name="verified" id="verified"
+               value="{{isset($shop) ?? isset($shop->verified_at) ? true : false}}"
+               @if(isset($shop))
+                   @if(isset($shop->verified_at))
+                       checked
+            @endif
+            @endif
+        >
+    </div>
+</div>
 <div class="col-md-12">
     <div class="form-group">
         <input class="btn btn-primary" type="submit" value="{{ $formMode === 'edit' ? 'Обновить' : 'Сохранить' }}">

@@ -15,7 +15,13 @@ use Illuminate\Support\Facades\Route;
 // login: admin@demo.com
 // pass: Dtnthievbn2653
 
-// Route::get('/scr', [App\Http\Controllers\MyScriptController::class, 'run']);
+
+Route::post('/shop-login-post', [\App\Http\Controllers\Shop\LoginController::class, 'login'])->name('shop.login');
+Route::get('/shop-login', [\App\Http\Controllers\Shop\LoginController::class, 'loginPage'])->name('shop-login');
+
+Route::middleware('shop.auth')->prefix('shops')->group(function () {
+    Route::get('/', [\App\Http\Controllers\Shop\ShopController::class, 'main'])->name('shop.main');
+});
 
 Auth::routes(['reset' => false, 'register' => false]);
 

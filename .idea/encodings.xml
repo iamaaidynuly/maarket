@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/resources/views/shop/box.blade.php" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/resources/views/shop/info-box.blade.php" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/resources/views/shop/layout" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/resources/views/shop/layout/assets" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/resources/views/shop/layout/assets/footer.blade.php" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/resources/views/shop/layout/assets/head.blade.php" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/resources/views/shop/layout/control-sidebar.blade.php" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/resources/views/shop/layout/footer.blade.php" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/resources/views/shop/layout/header" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/resources/views/shop/layout/header.blade.php" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/resources/views/shop/layout/header/logout.blade.php" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/resources/views/shop/layout/header/messages.blade.php" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/resources/views/shop/layout/header/notifications.blade.php" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/resources/views/shop/layout/header/tasks.blade.php" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/resources/views/shop/layout/header/user.blade.php" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/resources/views/shop/layout/main.blade.php" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/resources/views/shop/layout/sidebar" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/resources/views/shop/layout/sidebar.blade.php" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/resources/views/shop/layout/sidebar/items.blade.php" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/resources/views/shop/layout/sidebar/search-form.blade.php" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/resources/views/shop/layout/sidebar/user-panel.blade.php" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/resources/views/shop/page.blade.php" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/resources/views/shop/table-box.blade.php" charset="windows-1251" />
     <file url="PROJECT" charset="windows-1251" />
   </component>
 </project>

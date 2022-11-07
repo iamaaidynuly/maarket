@@ -39,7 +39,15 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->email }}</td>
-                            <td>{{ $item->translate(name)->ru }}</td>
+                            <td>{{ $item->getName->ru }}</td>
+                            <td>{{ $item->getDescription->ru }}</td>
+                            <td>{{ $item->getAddress->ru }}</td>
+                            <td>{{ $item->getCity->getTitle->ru }}</td>
+                            <td>
+                                @if(isset($item->icon))
+                                    <img src="{{url("$item->icon")}}" width="150px" height="100px">
+                                @endif
+                            </td>
 
                             <td>
                                 <form method="POST" action="{{ route('shops.destroy', $item->id)  }}"
