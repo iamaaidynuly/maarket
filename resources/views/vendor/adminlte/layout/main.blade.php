@@ -8,11 +8,11 @@
 <!-- Site wrapper -->
 <div class="wrapper">
 
-    @include('adminlte::layout.header')
+@include('adminlte::layout.header')
 
-    @include('adminlte::layout.sidebar')
+@include('adminlte::layout.sidebar')
 
-    <!-- Content Wrapper. Contains page content -->
+<!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         @yield('content')
     </div>

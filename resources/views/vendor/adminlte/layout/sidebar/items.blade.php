@@ -49,6 +49,7 @@
     <li><a href="/admin/category"><i class="fa fa-window-restore"></i> <span>Категории</span></a></li>
     <li><a href="/admin/product"><i class="fa fa-archive"></i> <span>Товары</span></a></li>
     <li><a href="{{route('users.index')}}"><i class="fa fa-user"></i> <span>Пользователи</span></a></li>
+    <li><a href="{{route('shops.index')}}"><i class="fa fa-user"></i> <span>Магазины</span></a></li>
     <li><a href="/admin/orders"><i class="fa fa-shopping-basket"></i> <span>Заказы</span></a></li>
     <li><a href="/admin/promocode"><i class="fa fa-percent"></i> <span>Промокоды</span></a></li>
     <li><a href="{{ route('funds.index') }}"><i class="fa fa-percent"></i> <span>Акции</span></a></li>

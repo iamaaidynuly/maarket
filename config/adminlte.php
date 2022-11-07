@@ -5,18 +5,18 @@ return [
     /*
      * The logo of the dashboard.
      */
-    'logo' => '<b>V</b>vid',
+    'logo' => '<b>Market</b>',
 
 
     /*
      * The small logo of the dashboard.
      */
-    'small_logo' => '<b>V</b>vid',
+    'small_logo' => '<b>Market</b>',
 
     /*
      * The name of the dashboard.
      */
-    'name' => 'Vivid',
+    'name' => 'Market',
 
     'appearence' => [
 

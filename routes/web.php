@@ -133,4 +133,6 @@ Route::middleware('role')->group(function () {
 
     Route::get('admin/user/export-date/{id}', [\App\Http\Controllers\Admin\UserController::class, 'export'])->name('user-export-date');
     Route::post('admin/user/export-orders/{id}', [\App\Http\Controllers\Admin\UserController::class, 'exportOrder'])->name('user-export');
+
+    Route::resource('admin/shops', \App\Http\Controllers\Admin\ShopController::class);
 });
