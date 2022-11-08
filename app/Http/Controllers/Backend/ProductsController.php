@@ -201,6 +201,7 @@ class ProductsController extends Controller
         }
 
         $product->brand_id = $requestData['brand_id'];
+        $product->brand_items_id = $request->brand_items;
         $product->country_id = $requestData['country_id'];
         $product->category_id = $requestData['category_id'];
 //        $product->size_id = $requestData['size_id'];
@@ -220,14 +221,14 @@ class ProductsController extends Controller
                 }
             }
 
-            if ($request->input('size_items')) {
-                foreach ($requestData['size_items'] as $item) {
-                    $size = new ProductSizeRelations();
-                    $size->product_id = $product->id;
-                    $size->size_item_id = $item;
-                    $size->save();
-                }
-            }
+//            if ($request->input('size_items')) {
+//                foreach ($requestData['size_items'] as $item) {
+//                    $size = new ProductSizeRelations();
+//                    $size->product_id = $product->id;
+//                    $size->size_item_id = $item;
+//                    $size->save();
+//                }
+//            }
 
             if ($request->input('filters')) {
                 foreach ($requestData['filters'] as $item) {
@@ -238,14 +239,14 @@ class ProductsController extends Controller
                 }
             }
 
-            if ($request->input('colors')) {
-                foreach ($requestData['colors'] as $item) {
-                    $colors = new ColorRelations();
-                    $colors->product_id = $product->id;
-                    $colors->color_id = $item;
-                    $colors->save();
-                }
-            }
+//            if ($request->input('colors')) {
+//                foreach ($requestData['colors'] as $item) {
+//                    $colors = new ColorRelations();
+//                    $colors->product_id = $product->id;
+//                    $colors->color_id = $item;
+//                    $colors->save();
+//                }
+//            }
         }
         if (!ProductFeature::where('product_id', $product->id)->exists()) {
             $type = Translate::create([

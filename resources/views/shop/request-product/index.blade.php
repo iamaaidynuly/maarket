@@ -1,159 +1,61 @@
-@extends('adminlte::layout.main', ['title' => 'Товары'])
+@extends('adminlte::layout.main', ['title' => 'Товары в модерации'])
 
 @section('content')
 
-    @component('adminlte::page', ['title' => 'Товары'])
+    @component('adminlte::page', ['title' => 'Товары в модерации'])
         @component('adminlte::box')
             @include('flash-message')
             <div class="row">
                 <div class="col-md-6">
-                    <a href="{{ url('/admin/product/create') }}" class="btn btn-success btn-sm"
+                    <a href="{{ route('shop_request_products.create') }}" class="btn btn-success btn-sm"
                        title="Добавить продукт">
                         <i class="fa fa-plus" aria-hidden="true"></i> Добавить
                     </a>
-                    <a href="{{ url('/admin/import') }}" class="btn btn-info btn-sm" title="Загрузить Excel">
-                        <i class="fa fa-cloud-upload" aria-hidden="true"></i> Загрузить Excel
-                    </a>
-                    <a href="{{ route('import_zip') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Импорт
-                        Zip</a>
-                    <a href="{{route('update-import')}}" class="btn btn-warning btn-sm"> <i class="fa fa-cloud-upload"
-                                                                                            aria-hidden="true"></i>Обновить
-                        товары</a>
-                </div>
-                <div class="col-md-6">
-                    <form action="/admin/product" method="GET"
-                          style="display: flex; justify-content: flex-end;padding-right:15px;">
-                        <div class="form-group">
-                            <select class="form-control" name="paginate" id="category" required=""
-                                    onchange="this.form.submit()">
-                                <option value="">Количество строк</option>
-                                <option value="100"
-                                        @if(isset($data['paginate']) && $data['paginate'] == '100') selected @endif>100
-                                </option>
-                                <option value="200"
-                                        @if(isset($data['paginate']) && $data['paginate'] == '200') selected @endif>200
-                                </option>
-                                <option value="300"
-                                        @if(isset($data['paginate']) && $data['paginate'] == '300') selected @endif>300
-                                </option>
-                            </select>
-                        </div>
-                        <div class="form-group" style="padding-left:10px;">
-                            <select class="form-control" name="category_id" id="category" required=""
-                                    onchange="this.form.submit()">
-                                <option value="">Все категории</option>
-                                @foreach($categories as $item)
-                                    <option value="{{$item->id}}" @if($item->getChilds->count() > 0) disabled
-                                            @endif @if(isset($data['category_id']) && $data['category_id'] == $item->id) selected @endif>{{$item->title}} </option>
-                                    @if($item->getChilds)
-                                        @foreach($item->getChilds as $child)
-                                            <option value="{{$child->id}}"
-                                                    @if(isset($data['category_id']) && $data['category_id'] == $child->id) selected @endif >
-                                                --- {{$child->getTitle->ru}}</option>
-                                        @endforeach
-                                    @endif
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group" style="padding-left:10px;">
-                            <select class="form-control" name="brand_id" id="brand" required=""
-                                    onchange="this.form.submit()">
-                                <option value="">Все бренды</option>
-                                @foreach($brands as $item)
-                                    <option value="{{$item->id}}"
-                                            @if(isset($data['brand_id']) && $data['brand_id'] == $item->id) selected @endif>{{$item->title}}</option>
-                                @endforeach
-
-                            </select>
-                        </div>
-                    </form>
                 </div>
             </div>
-            <br/>
             <div id="for_sort" class="table-responsive">
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>#</th>
                         <th>ID</th>
                         <th>Название Ru</th>
                         <th>Артикул</th>
-                        <th>Хиты продаж</th>
-                        <th>Новое поступление</th>
-                        <th>Акция 1</th>
-                        <th>Акция 2</th>
-                        <th>Сообщить о поступлении</th>
-                        <th>Настройка SEO</th>
+                        <th>Цена</th>
+                        <th>Статус</th>
                         <th>Деиствия</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($products as $item)
+                    @foreach($requestProducts as $item)
                         <tr>
-                            <td data-id="{{$item->id}}">{{ $loop->iteration }}</td>
                             <td>{{$item->id}}</td>
-                            <td>@if(isset($item->getTitle))
+                            <td>
+                                @if(isset($item->getTitle))
                                     {{ $item->getTitle->ru }}
                                 @else
                                     {{ 'Заголовок отсутствует' }}
-                                @endif</td>
+                                @endif
+                            </td>
                             <td>{{ $item->artikul }}</td>
+                            <td>{{ $item->price }}</td>
                             <td>
-                                <label class="checkbox-google">
-                                    <input type="checkbox" class="status_toggle status_update" data-id="{{$item->id}}"
-                                           data-type="product" @if($item->best == 1)
-                                        {{ 'checked' }}
-                                        @endif>
-                                    <span class="checkbox-google-switch"></span>
-                                </label>
+                                @if($item->status == \App\Models\ShopRequestProduct::STATUS_IN_PROCESS)
+                                    В процессе
+                                @elseif($item->status = \App\Models\ShopRequestProduct::STATUS_ACCEPTED)
+                                    Принято
+                                @else
+                                    Отклонено
+                                @endif
                             </td>
                             <td>
-                                <label class="checkbox-google">
-                                    <input type="checkbox" class="status_toggle status_update" data-id="{{$item->id}}"
-                                           data-type="product_new" @if($item->new == 1)
-                                        {{ 'checked' }}
-                                        @endif>
-                                    <span class="checkbox-google-switch"></span>
-                                </label>
-                            </td>
-                            <td>
-                                <label class="checkbox-google">
-                                    <input type="checkbox" class="status_toggle status_update"
-                                           data-id="{{$item->id}}"
-                                           data-type="funds_1" @if($item->funds_1 == 1)
-                                        {{ 'checked' }}
-                                        @endif>
-                                    <span class="checkbox-google-switch"></span>
-                                </label>
-                            </td>
-                            <td>
-                                <label class="checkbox-google">
-                                    <input type="checkbox" class="status_toggle status_update"
-                                           data-id="{{$item->id}}"
-                                           data-type="funds_2" @if($item->funds_2 == 1)
-                                        {{ 'checked' }}
-                                        @endif>
-                                    <span class="checkbox-google-switch"></span>
-                                </label>
-                            </td>
-                            <td><a href="{{ url('admin/admission/' . $item->id) }}">{{ 'Посмотреть' }}</a></td>
-                            <td><a href="/admin/product/seo/{{ $item->id }}" class="btn btn-info">Заполнить SEO</a></td>
-                            <td>
-
-{{--                                <a href="{{ route('product-price-types', $item->id) }}"--}}
-{{--                                   class="btn btn-warning btn-sm"><i class="fa fa-pencil-square-o"--}}
-{{--                                                                     aria-hidden="true"></i>Цены</a>--}}
-
-
-
-                                <a href="{{ url('/admin/product/' . $item->id . '/edit') }}"
+                                <a href="{{ route('shop_request_products.edit', $item->id) }}"
                                    title="Редактировать продукт">
                                     <button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o"
                                                                               aria-hidden="true"></i> Редактировать
                                     </button>
                                 </a>
 
-                                <form method="POST" action="{{ url('/admin/product' . '/' . $item->id) }}"
+                                <form method="POST" action="{{ route('shop_request_products.destroy', $item->id) }}"
                                       accept-charset="UTF-8" style="display:inline">
                                     {{ method_field('DELETE') }}
                                     {{ csrf_field() }}
@@ -167,7 +69,7 @@
                     @endforeach
                     </tbody>
                 </table>
-                <div class="pagination-wrapper"> {{ $products->links('pagination::bootstrap-4') }} </div>
+                <div class="pagination-wrapper"> {{ $requestProducts->links('pagination::bootstrap-4') }} </div>
             </div>
         @endcomponent
     @endcomponent

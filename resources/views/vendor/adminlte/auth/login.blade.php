@@ -1,6 +1,7 @@
 @extends('adminlte::auth.layout', ['title' => trans('adminlte::adminlte.sign_in')])
 
 @section('content')
+    <a href="{{route('shop-login')}}">login as shop</a>
     <div class="login-box">
         <div class="login-logo">
             <a href="{{ config('adminlte.urls.base') }}">

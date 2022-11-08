@@ -72,7 +72,13 @@
     @endif
 
     @if(isset($magazin))
+
         <li><a href="{{route('shop.main')}}"><i class="fa fa-home"></i> <span>Главная</span></a></li>
+        <li><a href="{{ route('products.index') }}"><i class="fa fa-archive"></i> <span>Товары принятые</span></a></li>
+        <li><a href="{{ route('shop_request_products.index') }}"><i class="fa fa-archive"></i> <span>Товары в модерации</span></a></li>
+        <li><a href=""><i class="fa fa-shopping-basket"></i> <span>Заказы</span></a></li>
+
+
     @endif
     <!-- <li class="header">LABELS</li>
     <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>

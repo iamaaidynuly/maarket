@@ -9,12 +9,14 @@ use App\Models\Brand;
 use App\Models\BrandItems;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+
 class BrandsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['getBrand']);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -50,26 +52,26 @@ class BrandsController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'table_size' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ],
-        [
-            'image.image' => 'Файл должен быть картинкой',
-            'image.required' => 'Загрузите изображение',
-            'image.mimes' => 'Проверьте формат изображения (jpeg,png,jpg,gif,svg)',
-            'image.max' => 'Размер файла не может превышать 2МБ',
-            'table_size.image' => 'Файл должен быть картинкой',
-            'table_size.required' => 'Загрузите изображение',
-            'table_size.mimes' => 'Проверьте формат изображения (jpeg,png,jpg,gif,svg)',
-            'table_size.max' => 'Размер файла не может превышать 2МБ',
-        ]);
+            [
+                'image.image' => 'Файл должен быть картинкой',
+                'image.required' => 'Загрузите изображение',
+                'image.mimes' => 'Проверьте формат изображения (jpeg,png,jpg,gif,svg)',
+                'image.max' => 'Размер файла не может превышать 2МБ',
+                'table_size.image' => 'Файл должен быть картинкой',
+                'table_size.required' => 'Загрузите изображение',
+                'table_size.mimes' => 'Проверьте формат изображения (jpeg,png,jpg,gif,svg)',
+                'table_size.max' => 'Размер файла не может превышать 2МБ',
+            ]);
         $requestData = $request->all();
         if ($request->hasFile('image')) {
-            $name = time().'.'.$requestData['image']->extension();
+            $name = time() . '.' . $requestData['image']->extension();
             $path = 'brand';
             $requestData['image'] = $request->file('image')->storeAs($path, $name, 'static');
         }
 
         if ($request->hasFile('table_size')) {
 
-            $name = time().'.'.$requestData['table_size']->extension();
+            $name = time() . '.' . $requestData['table_size']->extension();
             $path = 'brand';
             $requestData['table_size'] = $request->file('table_size')->storeAs($path, $name, 'static');
         }
@@ -99,7 +101,7 @@ class BrandsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      *
      * @return \Illuminate\View\View
      */
@@ -113,7 +115,7 @@ class BrandsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      *
      * @return \Illuminate\View\View
      */
@@ -128,7 +130,7 @@ class BrandsController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param  int  $id
+     * @param int $id
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
@@ -138,49 +140,49 @@ class BrandsController extends Controller
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'table_size' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ],
-        [
-            'image.image' => 'Файл должен быть картинкой',
-            'image.mimes' => 'Проверьте формат изображения (jpeg,png,jpg,gif,svg)',
-            'image.max' => 'Размер файла не может превышать 2МБ',
-            'table_size.image' => 'Файл должен быть картинкой',
-            'table_size.mimes' => 'Проверьте формат изображения (jpeg,png,jpg,gif,svg)',
-            'table_size.max' => 'Размер файла не может превышать 2МБ'
-        ]);
+            [
+                'image.image' => 'Файл должен быть картинкой',
+                'image.mimes' => 'Проверьте формат изображения (jpeg,png,jpg,gif,svg)',
+                'image.max' => 'Размер файла не может превышать 2МБ',
+                'table_size.image' => 'Файл должен быть картинкой',
+                'table_size.mimes' => 'Проверьте формат изображения (jpeg,png,jpg,gif,svg)',
+                'table_size.max' => 'Размер файла не может превышать 2МБ'
+            ]);
 
         $requestData = $request->all();
 
         $brand = Brand::findOrFail($id);
 
         if ($request->hasFile('image')) {
-            if($brand->image != null){
+            if ($brand->image != null) {
                 Storage::disk('static')->delete($brand->image);
             }
-            $name = time().'.'.$requestData['image']->extension();
+            $name = time() . '.' . $requestData['image']->extension();
             $path = 'brand';
             $requestData['image'] = $request->file('image')->storeAs($path, $name, 'static');
 
             $brand->image = $requestData['image'];
         }
         if ($request->hasFile('table_size')) {
-            if($brand->table_size != null){
+            if ($brand->table_size != null) {
                 Storage::disk('static')->delete($brand->table_size);
             }
-            $name = time().'.'.$requestData['table_size']->extension();
+            $name = time() . '.' . $requestData['table_size']->extension();
             $path = 'brand';
             $requestData['table_size'] = $request->file('table_size')->storeAs($path, $name, 'static');
 
             $brand->table_size = $requestData['table_size'];
         }
-            $title = Translate::find($brand->title);
-            $title->ru = $requestData['title']['ru'];
-            $title->en = $requestData['title']['en'];
-            $title->kz = $requestData['title']['kz'];
-            $title->update();
-            $content = Translate::find($brand->content);
-            $content->ru = $requestData['content']['ru'];
-            $content->en = $requestData['content']['en'];
-            $content->kz = $requestData['content']['kz'];
-            $content->update();
+        $title = Translate::find($brand->title);
+        $title->ru = $requestData['title']['ru'];
+        $title->en = $requestData['title']['en'];
+        $title->kz = $requestData['title']['kz'];
+        $title->update();
+        $content = Translate::find($brand->content);
+        $content->ru = $requestData['content']['ru'];
+        $content->en = $requestData['content']['en'];
+        $content->kz = $requestData['content']['kz'];
+        $content->update();
         $brand->update();
 
         return redirect('admin/brands')->with('flash_message', 'Бренд сохранен');
@@ -189,7 +191,7 @@ class BrandsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
@@ -197,10 +199,10 @@ class BrandsController extends Controller
     {
         $brand = Brand::findOrFail($id);
 
-        if($brand->image != null){
+        if ($brand->image != null) {
             Storage::disk('static')->delete($brand->image);
         }
-        if($brand->table_size != null){
+        if ($brand->table_size != null) {
             Storage::disk('static')->delete($brand->table_size);
         }
 
@@ -220,18 +222,19 @@ class BrandsController extends Controller
         $brands = Brand::findOrFail($id);
         return view('brands.meta_seo', compact('brands'));
     }
+
     public function updateSeo(Request $request, $id)
     {
         $requestData = $request->all();
         $brands = Brand::findOrFail($id);
 
         $meta_title = Translate::where('id', $brands->meta_title)->first();
-        if($meta_title){
+        if ($meta_title) {
             $meta_title->ru = $requestData['meta_title']['ru'];
             $meta_title->en = $requestData['meta_title']['en'];
             $meta_title->kz = $requestData['meta_title']['kz'];
             $meta_title->update();
-        }else{
+        } else {
             $create_title = new Translate();
             $create_title->ru = $requestData['meta_title']['ru'];
             $create_title->en = $requestData['meta_title']['en'];
@@ -242,12 +245,12 @@ class BrandsController extends Controller
         }
 
         $meta_description = Translate::where('id', $brands->meta_description)->first();
-        if($meta_description){
+        if ($meta_description) {
             $meta_description->ru = $requestData['meta_description']['ru'];
             $meta_description->en = $requestData['meta_description']['en'];
             $meta_description->kz = $requestData['meta_description']['kz'];
             $meta_description->update();
-        }else{
+        } else {
             $create_description = new Translate();
             $create_description->ru = $requestData['meta_description']['ru'];
             $create_description->en = $requestData['meta_description']['en'];
@@ -259,13 +262,14 @@ class BrandsController extends Controller
 
         return redirect('admin/brands')->with('flash_message', 'Мета данные сохранены');
     }
+
     public function getBrand(Request $request)
     {
         $brand_items = BrandItems::join('translates', 'translates.id', 'brand_items.title')
-        ->where('brand_items.brand_id', request('brand_id'))
-        ->select('brand_items.id', 'brand_items.title','translates.ru')
-        ->orderBy('translates.ru', 'ASC')
-        ->get();
+            ->where('brand_items.brand_id', request('brand_id'))
+            ->select('brand_items.id', 'brand_items.title', 'translates.ru')
+            ->orderBy('translates.ru', 'ASC')
+            ->get();
         //dd($sizes);
         return view('products.brand_items_option', compact('brand_items'));
     }
@@ -284,8 +288,8 @@ class BrandsController extends Controller
     {
         $brand = Brand::findOrFail($id);
         $brand_items = BrandItems::where('brand_id', $id)->get();
-       // dd($id, $filter,$filter_items);
-        return view('brands.brand_items', compact('brand','brand_items'));
+        // dd($id, $filter,$filter_items);
+        return view('brands.brand_items', compact('brand', 'brand_items'));
     }
 
 
@@ -297,14 +301,14 @@ class BrandsController extends Controller
         $brand_name->ru = $requestData['brand_item']['ru'];
         $brand_name->en = $requestData['brand_item']['en'];
 
-        if($brand_name->save()){
+        if ($brand_name->save()) {
             $brand_item = new BrandItems();
             $brand_item->title = $brand_name->id;
             $brand_item->brand_id = $id;
-            if($brand_item->save()){
-                return redirect('admin/brand-items/'.$id)->with('flash_message', 'Значение добавлено');
-            }else{
-                return redirect('admin/brand-items/'.$id)->with('error', 'Возникла ошибка при добавлении');
+            if ($brand_item->save()) {
+                return redirect('admin/brand-items/' . $id)->with('flash_message', 'Значение добавлено');
+            } else {
+                return redirect('admin/brand-items/' . $id)->with('error', 'Возникла ошибка при добавлении');
             }
         }
     }
@@ -320,10 +324,10 @@ class BrandsController extends Controller
         $brand_name->ru = $requestData['brand_item']['ru'];
         $brand_name->en = $requestData['brand_item']['en'];
 
-        if($brand_name->update()){
-            return redirect('admin/brand-items/'.$brand_item->getParent->id)->with('flash_message', 'Значение добавлено');
-        }else{
-            return redirect('admin/brand-items/'.$brand_item->getParent->id)->with('error', 'Возникла ошибка при добавлении');
+        if ($brand_name->update()) {
+            return redirect('admin/brand-items/' . $brand_item->getParent->id)->with('flash_message', 'Значение добавлено');
+        } else {
+            return redirect('admin/brand-items/' . $brand_item->getParent->id)->with('error', 'Возникла ошибка при добавлении');
         }
     }
 
@@ -334,12 +338,12 @@ class BrandsController extends Controller
 
         $brand_name = Translate::where('id', $brand_item->title)->first();
 
-        if($brand_name->delete()){
+        if ($brand_name->delete()) {
 
             if ($brand_item->delete()) {
-                return redirect('admin/brand-items/'.$brand_item->getParent->id)->with('flash_message', 'Значение удалено');
-            }else{
-                return redirect('admin/brand-items/'.$brand_item->getParent->id)->with('error', 'Возникла ошибка при удалении');
+                return redirect('admin/brand-items/' . $brand_item->getParent->id)->with('flash_message', 'Значение удалено');
+            } else {
+                return redirect('admin/brand-items/' . $brand_item->getParent->id)->with('error', 'Возникла ошибка при удалении');
             }
         }
     }

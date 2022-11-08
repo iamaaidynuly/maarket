@@ -23,6 +23,8 @@
     <file url="file://$PROJECT_DIR$/resources/views/shop/layout/sidebar/search-form.blade.php" charset="windows-1251" />
     <file url="file://$PROJECT_DIR$/resources/views/shop/layout/sidebar/user-panel.blade.php" charset="windows-1251" />
     <file url="file://$PROJECT_DIR$/resources/views/shop/page.blade.php" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/resources/views/shop/product/brand_items_option.blade.php" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/resources/views/shop/product/filters_option.blade.php" charset="windows-1251" />
     <file url="file://$PROJECT_DIR$/resources/views/shop/table-box.blade.php" charset="windows-1251" />
     <file url="PROJECT" charset="windows-1251" />
   </component>

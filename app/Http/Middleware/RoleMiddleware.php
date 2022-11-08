@@ -19,6 +19,7 @@ class RoleMiddleware
     public function handle(Request $request, Closure $next)
     {
         if ($request->user()->role != 1) {
+            session()->flush();
             Auth::logout();
 
             return redirect()->route('get-login')->with('error', 'Access denied!');

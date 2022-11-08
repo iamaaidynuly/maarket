@@ -3,9 +3,12 @@
 @section('content')
     @component('adminlte::page', ['title' => 'Добавить товар'])
         @component('adminlte::box')
-            <a href="{{ url('/admin/product') }}" title="Назад"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Назад</button></a>
-            <br />
-            <br />
+            <a href="{{ route('products.index') }}" title="Назад">
+                <button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Назад
+                </button>
+            </a>
+            <br/>
+            <br/>
 
             @if ($errors->any())
                 <ul class="alert alert-danger">
@@ -16,10 +19,13 @@
             @endif
 
             <div class="col-md-12">
-                <form method="POST" action="{{ url('/admin/product') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('products.store') }}" accept-charset="UTF-8"
+                      class="form-horizontal" enctype="multipart/form-data">
                     {{ csrf_field() }}
 
-                    @include ('products.form', ['formMode' => 'create'])
+                    <input type="hidden" name="shop_id" value="{{$magazin->id}}">
+
+                    @include ('shop.product.form', ['formMode' => 'create'])
 
                 </form>
             </div>
@@ -27,25 +33,25 @@
     @endcomponent
 @endsection
 @push('scripts')
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('.js-example-basic-multiple').select2();
             $('.js-example-basic-single').select2();
-            $('#category_id').change(function(){
+            $('#category_id').change(function () {
                 console.log('select');
                 let val = $('#category_id :selected').val();
                 $.ajax({
                     method: "GET",
-                    url: "/get-filters?category_id="+val,
+                    url: "/get-filters?category_id=" + val,
                     success: (response) => {
                         $('#filters').find('optgroup').remove().end();
                         $("#filters").prepend(response);
                         $('#filters').select2();
                     },
                     error: (error) => {
-                    console.log(error);
+                        console.log(error);
                     }
                 })
 
@@ -56,15 +62,15 @@
 
     </script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('.js-example-basic-multiple').select2();
             $('.js-example-basic-single').select2();
-            $('#size_id').change(function(){
+            $('#size_id').change(function () {
                 console.log('select');
                 let val = $('#size_id :selected').val();
                 $.ajax({
                     method: "GET",
-                    url: "/admin/get-sizes?size_id="+val,
+                    url: "/admin/get-sizes?size_id=" + val,
                     success: (response) => {
                         console.log(response);
                         $('#size_items').find('option').remove().end();
@@ -72,7 +78,7 @@
                         $('#size_items').select2();
                     },
                     error: (error) => {
-                    console.log(error);
+                        console.log(error);
                     }
                 })
 
@@ -83,15 +89,15 @@
 
     </script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('.js-example-basic-multiple').select2();
             $('.js-example-basic-single').select2();
-            $('#brand_id').change(function(){
+            $('#brand_id').change(function () {
                 console.log('select');
                 let val = $('#brand_id :selected').val();
                 $.ajax({
                     method: "GET",
-                    url: "/admin/get-brands?brand_id="+val,
+                    url: "/get-brands?brand_id=" + val,
                     success: (response) => {
                         console.log(response);
                         $('#brand_items').find('option').remove().end();
@@ -99,7 +105,7 @@
                         $('#brand_items').select2();
                     },
                     error: (error) => {
-                    console.log(error);
+                        console.log(error);
                     }
                 })
 
@@ -111,12 +117,12 @@
     </script>
     <script src="/ckeditor/ckeditor.js"></script>
     <script>
-        CKEDITOR.replace( 'description_ru' );
-        CKEDITOR.replace( 'description_en' );
-        CKEDITOR.replace( 'description_kz' );
-        CKEDITOR.replace( 'specifications_ru' );
-        CKEDITOR.replace( 'specifications_en' );
-        CKEDITOR.replace( 'specifications_kz' );
+        CKEDITOR.replace('description_ru');
+        CKEDITOR.replace('description_en');
+        CKEDITOR.replace('description_kz');
+        CKEDITOR.replace('specifications_ru');
+        CKEDITOR.replace('specifications_en');
+        CKEDITOR.replace('specifications_kz');
 
     </script>
 @endpush

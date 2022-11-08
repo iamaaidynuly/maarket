@@ -14,10 +14,10 @@ class ProductImages extends Model
     protected $table = 'product_images';
 
     /**
-    * The database primary key value.
-    *
-    * @var string
-    */
+     * The database primary key value.
+     *
+     * @var string
+     */
     protected $primaryKey = 'id';
 
     /**
@@ -27,5 +27,5 @@ class ProductImages extends Model
      */
     protected $fillable = ['product_id', 'image'];
 
-    
+
 }

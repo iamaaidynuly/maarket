@@ -18,9 +18,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/shop-login-post', [\App\Http\Controllers\Shop\LoginController::class, 'login'])->name('shop.login');
 Route::get('/shop-login', [\App\Http\Controllers\Shop\LoginController::class, 'loginPage'])->name('shop-login');
+Route::get('/get-brands', [App\Http\Controllers\Backend\BrandsController::class, 'getBrand']);
+Route::get('/get-filters', [App\Http\Controllers\Backend\FiltersController::class, 'getFilters'])->name('get-filters');
 
 Route::middleware('shop.auth')->prefix('shops')->group(function () {
     Route::get('/', [\App\Http\Controllers\Shop\ShopController::class, 'main'])->name('shop.main');
+
+    Route::resource('/products', \App\Http\Controllers\Shop\ProductController::class);
+    Route::resource('/shop_request_products', \App\Http\Controllers\Shop\ShopRequestProductController::class);
 });
 
 Auth::routes(['reset' => false, 'register' => false]);
@@ -61,7 +66,6 @@ Route::middleware('role')->group(function () {
     Route::post('/admin/product/seo/{id}/update', [App\Http\Controllers\Backend\ProductsController::class, 'updateSeo']);
     Route::post('admin/product-delete-img/{id}', [App\Http\Controllers\Backend\ProductsController::class, 'imgDelete'])->name('img-delete');
     Route::post('/admin/product/position/{id}/update', [App\Http\Controllers\Backend\ProductsController::class, 'updatePosition']);
-    Route::get('admin/get-filters', [App\Http\Controllers\Backend\FiltersController::class, 'getFilters'])->name('get-filters');
     Route::post('admin/upload-image', [App\Http\Controllers\HomeController::class, 'upload'])->name('img-upload');
     Route::get('admin/filter-items/{id}', [App\Http\Controllers\Backend\FiltersController::class, 'filterItems'])->name('filter-items');
     Route::post('admin/filter-items/{id}/store', [App\Http\Controllers\Backend\FiltersController::class, 'filterItemsStore'])->name('filter-items-store');
