@@ -20,7 +20,8 @@ class ShopProductResource extends JsonResource
             'shop_id'   =>  $this->shop_id,
             'shop_name' =>  Shop::find($this->shop_id)->getName->ru,
             'product_id'    =>  $this->product_id,
-            'status'    =>  boolval($this->status)
+            'status'    =>  boolval($this->status),
+            'price' =>  $this->price,
         ];
     }
 }

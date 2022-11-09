@@ -5,14 +5,14 @@
     @component('adminlte::page', ['title' => 'Товары'])
         @component('adminlte::box')
             @include('flash-message')
-{{--            <div class="row">--}}
-{{--                <div class="col-md-6">--}}
-{{--                    <a href="{{ route('products.create') }}" class="btn btn-success btn-sm"--}}
-{{--                       title="Добавить продукт">--}}
-{{--                        <i class="fa fa-plus" aria-hidden="true"></i> Добавить--}}
-{{--                    </a>--}}
-{{--                </div>--}}
-{{--            </div>--}}
+            <div class="row">
+                <div class="col-md-6">
+                    <a href="{{ route('products.create') }}" class="btn btn-success btn-sm"
+                       title="Добавить продукт">
+                        <i class="fa fa-plus" aria-hidden="true"></i> Добавить
+                    </a>
+                </div>
+            </div>
             <div id="for_sort" class="table-responsive">
                 <table class="table">
                     <thead>

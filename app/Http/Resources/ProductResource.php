@@ -10,6 +10,7 @@ use App\Models\ProductFeature;
 use App\Models\ProductFilterRelations;
 use App\Models\ProductImages;
 use App\Models\ProductPriceTypes;
+use App\Models\ShopProduct;
 use App\Models\Size;
 use App\Models\Translate;
 use App\Models\User;
@@ -69,6 +70,7 @@ class ProductResource extends JsonResource
             'similars' => SimilarsResource::collection(Product::where('products.id', '!=',$this->id)
                 ->where('category_id', $this->category_id)->orderBy('created_at', 'desc')->limit(10)
                 ->get()),
+            'others'    => ShopProductResource::collection(ShopProduct::whereProductId($this->id)->get()),
         ];
     }
 }

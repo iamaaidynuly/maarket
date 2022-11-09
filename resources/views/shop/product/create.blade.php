@@ -25,8 +25,39 @@
 
                     <input type="hidden" name="shop_id" value="{{$magazin->id}}">
 
-                    @include ('shop.product.form', ['formMode' => 'create'])
+                    <div class="form-group col-md-12 {{ $errors->has('Продукт') ? 'has-error' : '' }}">
+                        <label for="product" class="control-label">{{ 'Продукт' }}</label>
+                        <select name="product" id="product" class="form-control">
+                            @foreach($products as $product)
+                                @if(isset($product->getTitle))
+                                    <option value="{{$product->id}}">{{$product->id}}.{{$product->getTitle->ru}},Цена:{{$product->current_price}}</option>
+                                @else
+                                    <option value="{{$product->id}}">Название отсутствует</option>
+                                @endif
+                            @endforeach
+                        </select>
+                        {!! $errors->first('product', '<p class="help-block">:message</p>') !!}
+                    </div>
 
+                    <div class="form-group col-md-12 {{ $errors->has('Цена') ? 'has-error' : '' }}">
+                        <label for="price" class="control-label">{{ 'Цена' }}</label>
+                        <input type="text" class="form-control" name="price" id="price">
+                    </div>
+
+                    <div class="form-group col-md-12 {{ $errors->has('В наличии') ? 'has-error' : '' }}">
+                        <label for="available" class="control-label">{{ 'В наличии' }}</label>
+                        <select name="available" id="available" class="form-control">
+                            <option value="1">Есть</option>
+                            <option value="0">Нет</option>
+                        </select>
+                        {!! $errors->first('available', '<p class="help-block">:message</p>') !!}
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <input class="btn btn-primary" type="submit">
+                        </div>
+                    </div>
                 </form>
             </div>
         @endcomponent

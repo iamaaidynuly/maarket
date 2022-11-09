@@ -17,18 +17,56 @@
                     @endforeach
                 </ul>
             @endif
-
-            <form method="POST" action="{{ route('products.update', $product->id) }}" accept-charset="UTF-8"
+            <form method="POST" action="{{ route('products.update', $shopProduct->id) }}" accept-charset="UTF-8"
                   class="form-horizontal" enctype="multipart/form-data">
                 {{ method_field('PUT') }}
                 {{ csrf_field() }}
 
-                @include ('shop.product.form', ['formMode' => 'edit'])
+                <input type="hidden" name="shop_id" value="{{$magazin->id}}">
 
+                <div class="form-group col-md-12 {{ $errors->has('Продукт') ? 'has-error' : '' }}">
+                    <label for="product" class="control-label">{{ 'Продукт' }}</label>
+                    <select name="product" id="product" class="form-control">
+                        @foreach($products as $product)
+                            @if(isset($product->getTitle))
+                                <option value="{{$product->id}}"
+                                        @if($shopProduct->product_id == $product->id) selected @endif>{{$product->id}}
+                                    .{{$product->getTitle->ru}},
+                                    Цена:{{$product->current_price}}
+                                </option>
+                            @else
+                                <option value="{{$product->id}}"
+                                        @if($shopProduct->product_id == $product->id) selected @endif>
+                                    Название отсутствует
+                                </option>
+                            @endif
+                        @endforeach
+                    </select>
+                    {!! $errors->first('product', '<p class="help-block">:message</p>') !!}
+                </div>
+
+                <div class="form-group col-md-12 {{ $errors->has('Цена') ? 'has-error' : '' }}">
+                    <label for="price" class="control-label">{{ 'Цена' }}</label>
+                    <input type="text" class="form-control" name="price" id="price" value="{{$shopProduct->price}}">
+                </div>
+
+                <div class="form-group col-md-12 {{ $errors->has('В наличии') ? 'has-error' : '' }}">
+                    <label for="available" class="control-label">{{ 'В наличии' }}</label>
+                    <select name="available" id="available" class="form-control">
+                        <option value="1" @if($shopProduct->available == true) selected @endif>Есть</option>
+                        <option value="0" @if($shopProduct->available == false) selected @endif>Нет</option>
+                    </select>
+                    {!! $errors->first('available', '<p class="help-block">:message</p>') !!}
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <input class="btn btn-primary" type="submit">
+                    </div>
+                </div>
             </form>
         @endcomponent
     @endcomponent
-
 @endsection
 @push('scripts')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
