@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Models\City;
+use App\Models\ShopProduct;
 use App\Models\Translate;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -38,5 +39,10 @@ trait TranslateTrait
     public function getCity(): HasOne
     {
         return $this->hasOne(City::class, 'id', 'city_id');
+    }
+
+    public function products(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(ShopProduct::class, 'shop_id', 'id');
     }
 }

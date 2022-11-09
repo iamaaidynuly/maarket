@@ -145,4 +145,8 @@ Route::middleware('role')->group(function () {
     Route::post('admin/user/export-orders/{id}', [\App\Http\Controllers\Admin\UserController::class, 'exportOrder'])->name('user-export');
 
     Route::resource('admin/shops', \App\Http\Controllers\Admin\ShopController::class);
+    Route::resource('admin/request-products', \App\Http\Controllers\Admin\ShopRequestProductController::class);
+
+    Route::get('admin/request-product-accept/{id}', [\App\Http\Controllers\Admin\ShopRequestProductController::class, 'accept'])->name('request-product-accept');
+    Route::get('admin/request-product-reject/{id}', [\App\Http\Controllers\Admin\ShopRequestProductController::class, 'reject'])->name('request-product-reject');
 });

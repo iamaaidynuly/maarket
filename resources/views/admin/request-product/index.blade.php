@@ -5,19 +5,12 @@
     @component('adminlte::page', ['title' => 'Товары в модерации'])
         @component('adminlte::box')
             @include('flash-message')
-            <div class="row">
-                <div class="col-md-6">
-                    <a href="{{ route('shop_request_products.create') }}" class="btn btn-success btn-sm"
-                       title="Добавить продукт">
-                        <i class="fa fa-plus" aria-hidden="true"></i> Добавить
-                    </a>
-                </div>
-            </div>
             <div id="for_sort" class="table-responsive">
                 <table class="table">
                     <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Магазин</th>
                         <th>Название Ru</th>
                         <th>Артикул</th>
                         <th>Цена</th>
@@ -26,9 +19,10 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($requestProducts as $item)
+                    @foreach($shopRequestProducts as $item)
                         <tr>
                             <td>{{$item->id}}</td>
+                            <td>{{ $item->shop->getName->ru }}</td>
                             <td>
                                 @if(isset($item->getTitle))
                                     {{ $item->getTitle->ru }}
@@ -48,35 +42,18 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="{{ route('shop_request_products.show', $item->id) }}"
-                                   title="Смотреть заявку">
-                                    <button class="btn btn-warning btn-sm"><i class="fa fa-pencil-square-o"
-                                                                              aria-hidden="true"></i> Подробнее
-                                    </button>
-                                </a>
-
-                                <a href="{{ route('shop_request_products.edit', $item->id) }}"
+                                <a href="{{ route('request-products.show', $item->id) }}"
                                    title="Редактировать продукт">
-                                    <button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o"
+                                    <button class="btn btn-warning btn-sm"><i class="fa fa-pencil-square-o"
                                                                               aria-hidden="true"></i> Редактировать
                                     </button>
                                 </a>
-
-                                <form method="POST" action="{{ route('shop_request_products.destroy', $item->id) }}"
-                                      accept-charset="UTF-8" style="display:inline">
-                                    {{ method_field('DELETE') }}
-                                    {{ csrf_field() }}
-                                    <button type="submit" class="btn btn-danger btn-sm" title="Удалить страну"
-                                            onclick="return confirm(&quot;Подтвердите удаление&quot;)"><i
-                                            class="fa fa-trash-o" aria-hidden="true"></i> Удалить
-                                    </button>
-                                </form>
                             </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
-                <div class="pagination-wrapper"> {{ $requestProducts->links('pagination::bootstrap-4') }} </div>
+                <div class="pagination-wrapper"> {{ $shopRequestProducts->links('pagination::bootstrap-4') }} </div>
             </div>
         @endcomponent
     @endcomponent

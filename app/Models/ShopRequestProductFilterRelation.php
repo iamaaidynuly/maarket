@@ -10,4 +10,9 @@ class ShopRequestProductFilterRelation extends Model
     use HasFactory;
 
     public $timestamps = false;
+
+    protected function filter_item(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(FilterItems::class, 'id', 'filter_item_id');
+    }
 }

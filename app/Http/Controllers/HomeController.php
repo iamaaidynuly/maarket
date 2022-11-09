@@ -62,7 +62,6 @@ class HomeController extends Controller
 
     public function upload(Request $request)
     {
-        //dd($request->all());
         $request->validate([
             'upload' => 'required|mimes:doc,docx,xls,xlsx,ppt,pdf,zip,jpeg,png,jpg,gif,svg|max:2048',
         ],

@@ -36,7 +36,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $shop = $request->session()->get('magazin');
-        $shopProducts = ShopProduct::whereShopId($shop->id)->paginate(15);
+        $shopProducts = ShopProduct::whereShopId($shop->id)->orderBy('created_at', 'desc')->paginate(15);
 
         return view('shop.product.index', [
             'magazin'   =>  $shop,

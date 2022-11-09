@@ -17,6 +17,7 @@ use App\Models\PriceType;
 use App\Models\Product;
 use App\Models\ProductFeature;
 use App\Models\ProductPriceTypes;
+use App\Models\ShopProduct;
 use App\Models\Size;
 use App\Models\ProductFilterRelations;
 use App\Models\ProductSizeRelations;
@@ -335,6 +336,8 @@ class ProductsController extends Controller
 
         $feature = ProductFeature::where('product_id', $id)->first();
 
+        $shopProducts = ShopProduct::whereProductId($product->id)->get();
+
         return view('products.edit', compact(
             'product',
             'category',
@@ -350,6 +353,7 @@ class ProductsController extends Controller
             'size_items',
             'brand_items',
             'feature',
+            'shopProducts'
         ));
     }
 

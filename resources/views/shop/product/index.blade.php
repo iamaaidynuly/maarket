@@ -18,6 +18,7 @@
                     <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Продукт ID</th>
                         <th>Название Ru</th>
                         <th>Артикул</th>
                         <th>Цена</th>
@@ -29,6 +30,7 @@
                     @foreach($shopProducts as $item)
                         <tr>
                             <td>{{$item->id}}</td>
+                            <td>{{ $item->product_id }}</td>
                             <td>@if(isset($item->product->getTitle))
                                     {{ $item->product->getTitle->ru }}
                                 @else

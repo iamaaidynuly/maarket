@@ -465,6 +465,34 @@
         </div>
     @endif
 </div>
+<br>
+<br>
+<div class="card col-md-6">
+    <div class="card-header">
+        <h3 class="card-title">Продавцы товара </h3>
+    </div>
+
+    <div class="card-body">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Магазин</th>
+                <th>Цена</th>
+                <th>В наличии</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                @foreach($shopProducts as $product)
+                    <td>{{ $product->shop->getName->ru }}</td>
+                    <td>{{ $product->price }}</td>
+                    <td>{{ $product->available }}</td>
+                @endforeach
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 <div class="col-md-12">
     <div class="form-group">

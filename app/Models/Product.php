@@ -38,9 +38,7 @@ class Product extends Model
     {
         return $this->hasOne(Translate::class, 'id', 'title');
     }
-    // public function getShort(){
-    //     return $this->hasOne(Translate::class, 'id','short_description');
-    // }
+
     public function getDesc()
     {
         return $this->hasOne(Translate::class, 'id', 'description');

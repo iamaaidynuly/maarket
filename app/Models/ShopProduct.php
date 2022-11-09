@@ -42,7 +42,13 @@ class ShopProduct extends Model
         'available',
         'created_at',
         'updated_at',
+        'price',
     ];
+
+    public function shop()
+    {
+        return $this->hasOne(Shop::class, 'id', 'shop_id');
+    }
 
     public function product()
     {

@@ -28,7 +28,7 @@ class ShopRequestProductController extends Controller
     public function index(Request $request)
     {
         $magazin = $request->session()->get('magazin');
-        $requestProducts = ShopRequestProduct::where('shop_id', $magazin->id)->paginate(15);
+        $requestProducts = ShopRequestProduct::where('shop_id', $magazin->id)->orderBy('created_at', 'desc')->paginate(15);
 
         return view('shop.request-product.index', [
             'requestProducts' => $requestProducts,
@@ -77,7 +77,7 @@ class ShopRequestProductController extends Controller
             'artikul' => $request['artikul'],
             'stock' => $request['stock'],
             'price' => $request['price'],
-            'sale' => $request['sale'],
+            'sale' => $request['sale'] ?? 0,
             'current_price' => (intval($request['price']) * (100 - intval($request['sale']))) / 100,
             'brand_id' => $request['brand_id'],
             'brand_items_id' => $request['brand_items'],
@@ -116,11 +116,15 @@ class ShopRequestProductController extends Controller
      * Display the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(ShopRequestProduct $shopRequestProduct)
     {
-        //
+        $images = ShopRequestImage::where('shop_request_product_id', $shopRequestProduct->id)->pluck('image')->toArray();
+        $shopRequestProduct['images'] = $images;
+        $magazin = session()->get('magazin');
+
+        return view('shop.request-product.show', compact('shopRequestProduct', 'magazin'));
     }
 
     /**
