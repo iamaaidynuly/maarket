@@ -50,17 +50,12 @@ class BrandsController extends Controller
     {
         $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'table_size' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ],
             [
                 'image.image' => 'Файл должен быть картинкой',
                 'image.required' => 'Загрузите изображение',
                 'image.mimes' => 'Проверьте формат изображения (jpeg,png,jpg,gif,svg)',
                 'image.max' => 'Размер файла не может превышать 2МБ',
-                'table_size.image' => 'Файл должен быть картинкой',
-                'table_size.required' => 'Загрузите изображение',
-                'table_size.mimes' => 'Проверьте формат изображения (jpeg,png,jpg,gif,svg)',
-                'table_size.max' => 'Размер файла не может превышать 2МБ',
             ]);
         $requestData = $request->all();
         if ($request->hasFile('image')) {
@@ -92,7 +87,6 @@ class BrandsController extends Controller
         $brand->slug = Str::slug($requestData['title']['ru']);
         $brand->content = $content->id;
         $brand->image = $requestData['image'];
-        $brand->table_size = $requestData['table_size'];
         $brand->save();
 
         return redirect('admin/brands')->with('flash_message', 'Бренд добавлен');
@@ -138,15 +132,11 @@ class BrandsController extends Controller
     {
         $request->validate([
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'table_size' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ],
             [
                 'image.image' => 'Файл должен быть картинкой',
                 'image.mimes' => 'Проверьте формат изображения (jpeg,png,jpg,gif,svg)',
                 'image.max' => 'Размер файла не может превышать 2МБ',
-                'table_size.image' => 'Файл должен быть картинкой',
-                'table_size.mimes' => 'Проверьте формат изображения (jpeg,png,jpg,gif,svg)',
-                'table_size.max' => 'Размер файла не может превышать 2МБ'
             ]);
 
         $requestData = $request->all();
@@ -162,16 +152,6 @@ class BrandsController extends Controller
             $requestData['image'] = $request->file('image')->storeAs($path, $name, 'static');
 
             $brand->image = $requestData['image'];
-        }
-        if ($request->hasFile('table_size')) {
-            if ($brand->table_size != null) {
-                Storage::disk('static')->delete($brand->table_size);
-            }
-            $name = time() . '.' . $requestData['table_size']->extension();
-            $path = 'brand';
-            $requestData['table_size'] = $request->file('table_size')->storeAs($path, $name, 'static');
-
-            $brand->table_size = $requestData['table_size'];
         }
         $title = Translate::find($brand->title);
         $title->ru = $requestData['title']['ru'];
